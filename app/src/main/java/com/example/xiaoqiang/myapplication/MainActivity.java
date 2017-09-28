@@ -30,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.open_lyric_text_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,LyricTextActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

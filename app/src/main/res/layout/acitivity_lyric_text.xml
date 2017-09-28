@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.example.xiaoqiang.myapplication.view.LyricTextView
+        android:id="@+id/lyric"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#44000000"
+        tools:changed_color="#ff0000"
+        tools:default_color="#000000"
+        tools:direction="left"
+        tools:text="按时大大的飒飒的"
+        tools:text_size="26dp" />
+
+    <SeekBar
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:max="100" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/left_t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="左" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switch_com"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@id/left_t" />
+
+        <TextView
+            android:id="@+id/right_t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/switch_com"
+            android:text="右" />
+    </RelativeLayout>
+
+</LinearLayout>
