@@ -17,7 +17,7 @@ import com.example.xiaoqiang.myapplication.utils.DisplayUtil;
  * Created by xiaoqiang on 2017/9/28.
  */
 
-public class LyricTextView extends View {
+public class GradientTextView extends View {
     public final static int LEFT = 0;
     public final static int RIGHT = 1;
     private final static int DEFAULT_COLOR = 0xff000000;
@@ -32,31 +32,31 @@ public class LyricTextView extends View {
     private int mTextHeight;
     private int mTextWidth;
 
-    public LyricTextView(Context context) {
+    public GradientTextView(Context context) {
         this(context, null);
     }
 
-    public LyricTextView(Context context, @Nullable AttributeSet attrs) {
+    public GradientTextView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public LyricTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public GradientTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
 
     private void init(AttributeSet attrs) {
         if (attrs != null) {
-            TypedArray t = getContext().obtainStyledAttributes(attrs, R.styleable.LyricTextView);
-            mText = t.getString(R.styleable.LyricTextView_text);
+            TypedArray t = getContext().obtainStyledAttributes(attrs, R.styleable.GradientTextView);
+            mText = t.getString(R.styleable.GradientTextView_text);
             if (mText == null) {
                 mText = "";
             }
-            mTextSize = t.getDimension(R.styleable.LyricTextView_text_size, DisplayUtil.dip2px(getContext(), 16));
-            mDefaultColor = t.getColor(R.styleable.LyricTextView_default_color, DEFAULT_COLOR);
-            mChangeColor = t.getColor(R.styleable.LyricTextView_changed_color, CHANGED_COLOR);
-            mDirection = t.getInt(R.styleable.LyricTextView_direction, LEFT);
-            mProgress = t.getFloat(R.styleable.LyricTextView_progress, 0);
+            mTextSize = t.getDimension(R.styleable.GradientTextView_text_size, DisplayUtil.dip2px(getContext(), 16));
+            mDefaultColor = t.getColor(R.styleable.GradientTextView_default_color, DEFAULT_COLOR);
+            mChangeColor = t.getColor(R.styleable.GradientTextView_changed_color, CHANGED_COLOR);
+            mDirection = t.getInt(R.styleable.GradientTextView_direction, LEFT);
+            mProgress = t.getFloat(R.styleable.GradientTextView_progress, 0);
             t.recycle();
         }
         initPaint();

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.example.xiaoqiang.myapplication.view.LyricTextView
+    <com.example.xiaoqiang.myapplication.view.GradientTextView
         android:id="@+id/lyric"
         android:layout_width="match_parent"
         android:layout_height="60dp"

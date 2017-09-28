@@ -7,23 +7,23 @@ import android.support.v7.widget.SwitchCompat;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
-import com.example.xiaoqiang.myapplication.view.LyricTextView;
+import com.example.xiaoqiang.myapplication.view.GradientTextView;
 
 /**
  * Created by xiaoqiang on 2017/9/28.
  */
 
-public class LyricTextActivity extends Activity {
+public class GradientTextActivity extends Activity {
     private SeekBar mSeekBar;
     private SwitchCompat mSwitch;
-    private LyricTextView mLyricTextView;
+    private GradientTextView mLyricTextView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_lyric_text);
         mSeekBar = (SeekBar) findViewById(R.id.seek_bar);
         mSwitch = (SwitchCompat) findViewById(R.id.switch_com);
-        mLyricTextView = (LyricTextView) findViewById(R.id.lyric);
+        mLyricTextView = (GradientTextView) findViewById(R.id.lyric);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -44,9 +44,9 @@ public class LyricTextActivity extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    mLyricTextView.setDirection(LyricTextView.RIGHT);
+                    mLyricTextView.setDirection(GradientTextView.RIGHT);
                 }else{
-                    mLyricTextView.setDirection(LyricTextView.LEFT);
+                    mLyricTextView.setDirection(GradientTextView.LEFT);
                 }
             }
         });

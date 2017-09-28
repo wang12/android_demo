@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="LyricTextView">
+    <declare-styleable name="GradientTextView">
         <attr name="text" format="string" />
         <attr name="text_size" format="dimension" />
         <attr name="default_color" format="color|reference" />
