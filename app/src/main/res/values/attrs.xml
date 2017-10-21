@@ -11,4 +11,10 @@
             <enum name="right" value="1" />
         </attr>
     </declare-styleable>
+    <declare-styleable name="CircularProgress">
+        <attr name="circle_width" format="dimension" />
+        <attr name="indeterminate_color" format="color|reference" />
+        <attr name="arc_color" format="color|reference" />
+        <attr name="start_angle" format="float"/>
+    </declare-styleable>
 </resources>

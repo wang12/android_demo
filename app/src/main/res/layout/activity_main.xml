@@ -20,5 +20,25 @@
         android:layout_margin="10dp"
         android:text="仿唱歌颜色"
         android:textAllCaps="false" />
-
+    <Button
+        android:id="@+id/open_gradien_text_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="仿今日头条实现"
+        android:textAllCaps="false" />
+    <Button
+        android:id="@+id/btn_rxjava"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="RXJava2.0"
+        android:textAllCaps="false" />
+    <Button
+        android:id="@+id/btn_circular_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="圆形进度"
+        android:textAllCaps="false" />
 </LinearLayout>

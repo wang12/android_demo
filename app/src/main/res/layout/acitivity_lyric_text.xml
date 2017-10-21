@@ -13,7 +13,7 @@
         tools:changed_color="#ff0000"
         tools:default_color="#000000"
         tools:direction="left"
-        tools:text="按时大大的飒飒的"
+        tools:text="我的歌曲啦~啦~啦~"
         tools:text_size="26dp" />
 
     <SeekBar

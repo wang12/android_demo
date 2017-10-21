@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.xiaoqiang.myapplication">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".application.MyApplication"
@@ -26,6 +26,13 @@
         <activity android:name=".GradientTextActivity">
 
         </activity>
+        <activity android:name=".GradientTitleBarActivity">
+
+        </activity>
+        <activity android:name=".RxJava2Activity">
+
+        </activity>
+        <activity android:name=".CircularProgressActivity" />
     </application>
 
 </manifest>
