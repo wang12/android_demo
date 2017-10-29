@@ -15,6 +15,12 @@
         <attr name="circle_width" format="dimension" />
         <attr name="indeterminate_color" format="color|reference" />
         <attr name="arc_color" format="color|reference" />
-        <attr name="start_angle" format="float"/>
+        <attr name="start_angle" format="float" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="color|reference" />
+        <attr name="src" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="DownloadCircularProgress" >
+        <attr name="backgroundColor" format="color|reference" />
     </declare-styleable>
 </resources>
