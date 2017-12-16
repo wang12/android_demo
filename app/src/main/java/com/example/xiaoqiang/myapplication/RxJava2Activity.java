@@ -14,6 +14,7 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 
 /**
  * Created by xiaoqiang on 2017/10/18.
@@ -38,10 +39,10 @@ public class RxJava2Activity extends Activity {
         Observable<Integer> observable = Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
-                emitter.onNext(1);
-                emitter.onNext(2);
-                emitter.onNext(3);
-                emitter.onComplete();
+//                emitter.onNext(1);
+//                emitter.onNext(2);
+                emitter.onError(new RuntimeException("我的测试"));
+//                emitter.onComplete();
             }
         });
         Observer observer = new Observer() {
@@ -57,7 +58,7 @@ public class RxJava2Activity extends Activity {
 
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG, "error");
+                Log.e(TAG, "error");
             }
 
             @Override
@@ -65,6 +66,14 @@ public class RxJava2Activity extends Activity {
                 Log.d(TAG, "complete");
             }
         };
-        observable.subscribe(observer);
+        observable
+                .map(new Function<Integer, String>() {
+                    @Override
+                    public String apply(Integer integer) throws Exception {
+                        Log.e("wqq","这里没有执行吧?"+integer);
+                        return "";
+                    }
+                })
+                .subscribe(observer);
     }
 }
