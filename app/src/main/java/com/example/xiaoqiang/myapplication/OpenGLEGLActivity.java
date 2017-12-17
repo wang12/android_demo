@@ -226,7 +226,7 @@ public class OpenGLEGLActivity extends Activity {
             GLES20.glViewport(0, 0, width, height);
             GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
             GLES20.glUseProgram(mProgram);
-            GLES20.glVertexAttribPointer(mProgram, 2, GLES20.GL_FLOAT, false, 0, vertices);
+            GLES20.glVertexAttribPointer(mPostion, 2, GLES20.GL_FLOAT, false, 0, vertices);
             GLES20.glEnableVertexAttribArray(mPostion);
             GLES20.glUniform4f(mColor, 0, 1, 0, 1);
             GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 3);
