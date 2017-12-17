@@ -41,4 +41,18 @@
         android:layout_margin="10dp"
         android:text="圆形进度"
         android:textAllCaps="false" />
+    <Button
+        android:id="@+id/btn_opengl_es"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="OpenGLEs"
+        android:textAllCaps="false" />
+    <Button
+        android:id="@+id/btn_opengl_egl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="OPENGL EGL"
+        android:textAllCaps="false" />
 </LinearLayout>

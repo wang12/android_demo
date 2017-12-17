@@ -33,6 +33,8 @@
 
         </activity>
         <activity android:name=".CircularProgressActivity" />
+        <activity android:name=".OpenGLEsDemo" />
+        <activity android:name=".OpenGLEGLActivity" />
     </application>
 
 </manifest>
