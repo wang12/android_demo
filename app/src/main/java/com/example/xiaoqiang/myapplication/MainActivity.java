@@ -63,6 +63,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.btn_opengl_egl_2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, OpenGLEGLSurfaceActivity.class);
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.btn_seek_bar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SeekbarActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

@@ -1,58 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
 
-    android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/open_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="TabLayout 导航条"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/open_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="TabLayout 导航条"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/open_lyric_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="仿唱歌颜色"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/open_gradien_text_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="仿今日头条实现"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/btn_rxjava"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="RXJava2.0"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/btn_circular_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="圆形进度"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/btn_opengl_es"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="OpenGLEs"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/btn_opengl_egl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="OPENGL EGL"
-        android:textAllCaps="false" />
-</LinearLayout>
+        <Button
+            android:id="@+id/open_lyric_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="仿唱歌颜色"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/open_gradien_text_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="仿今日头条实现"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_rxjava"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="RXJava2.0"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_circular_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="圆形进度"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_opengl_es"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="OpenGLEs"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_opengl_egl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="OPENGL EGL"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_opengl_egl_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="OPENGL EGLSurface"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_seek_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="自定义seekbar"
+            android:textAllCaps="false" />
+    </LinearLayout>
+</ScrollView>

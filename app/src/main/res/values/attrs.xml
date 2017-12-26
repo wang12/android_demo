@@ -18,9 +18,21 @@
         <attr name="start_angle" format="float" />
         <attr name="textSize" format="dimension" />
         <attr name="textColor" format="color|reference" />
-        <attr name="src" format="reference"/>
+        <attr name="src" format="reference" />
     </declare-styleable>
-    <declare-styleable name="DownloadCircularProgress" >
+    <declare-styleable name="DownloadCircularProgress">
         <attr name="backgroundColor" format="color|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ColorFulSeekbar">
+        <attr name="cThumbTint" format="reference" />
+        <attr name="cProgressTint" format="color|reference" />
+        <attr name="cBackground" format="color|reference" />
+        <attr name="cMaxHeight" format="dimension" />
+        <attr name="cMinHeight" format="dimension" />
+        <attr name="cMaxWidth" format="dimension" />
+        <attr name="cMinWidth" format="dimension" />
+        <attr name="cMax" format="integer" />
+        <attr name="cProgress" format="integer" />
     </declare-styleable>
 </resources>
