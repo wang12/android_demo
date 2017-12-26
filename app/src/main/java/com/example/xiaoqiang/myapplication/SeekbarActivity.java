@@ -33,7 +33,7 @@ public class SeekbarActivity extends Activity {
         mSeekbar.setOnSeekBarChangeListener(new ColorFulSeekbar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(ColorFulSeekbar seekBar, int progress, boolean fromUser) {
-//                Log.e(TAG, "onProgressChanged,progress:" + progress + ",fromUser:" + fromUser);
+                Log.e(TAG, "onProgressChanged,progress:" + progress + ",fromUser:" + fromUser);
             }
 
             @Override

@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
@@ -53,6 +54,8 @@ public class ColorFulSeekbar extends View {
     private int mProgress;
     private OnSeekBarChangeListener mOnSeekBarChangeListener;
     private List<ColorScope> mColorList;
+    private RectF mStartArc;
+    private RectF mEndArc;
 
     public ColorFulSeekbar(Context context) {
         this(context, null);
@@ -84,6 +87,11 @@ public class ColorFulSeekbar extends View {
         mProgress = 0;
     }
 
+    /**
+     * 加载自定义参数
+     *
+     * @param attrs
+     */
     private final void loadAttribute(AttributeSet attrs) {
         if (attrs != null) {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ColorFulSeekbar);
@@ -102,12 +110,16 @@ public class ColorFulSeekbar extends View {
         }
     }
 
+    /**
+     * 初始化，消除锯齿
+     */
     private final void init() {
         mLintPaint = new Paint();
         mLintPaint.setColor(mBackground);
         mLintPaint.setAntiAlias(true); //消除锯齿
-        mLintPaint.setStyle(Paint.Style.STROKE);
         mLintPaint.setStrokeWidth(mMaxHeight);
+//        mLintPaint.setStyle(Paint.Style.FILL);
+        mLintPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
         if (mThumbDrawable == null) {
             mThumbDrawable = new ShapeDrawable(new OvalShape());
@@ -128,7 +140,8 @@ public class ColorFulSeekbar extends View {
                 mColorList.add(new ColorScope(color, mProgress));
             }
             ColorScope colorScope = mColorList.get(mColorList.size() - 1);
-            if (colorScope.mColor != color) {
+            if (!(colorScope.mColor == color && (mProgress >= colorScope.mStartProgress
+                    && mProgress <= colorScope.mEndProgress))) {
                 colorScope = new ColorScope(color, mProgress);
                 mColorList.add(colorScope);
             }
@@ -149,30 +162,50 @@ public class ColorFulSeekbar extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mLintPaint.setColor(mBackground);
+        mLintPaint.setStrokeWidth(mMaxHeight);
         canvas.drawLine(mStartPoint.x,
                 mStartPoint.y,
                 mEndPoint.x,
                 mEndPoint.y,
                 mLintPaint);
+        drawStartArc(canvas);
+        drawEndArc(canvas);
         drawColorLint(canvas);
         drawThumb(canvas);
+    }
+
+    private void drawStartArc(Canvas canvas) {
+        mLintPaint.setStrokeWidth(1);
+        canvas.drawArc(mStartArc, 90, 180, false, mLintPaint);
+    }
+
+    private void drawEndArc(Canvas canvas) {
+        mLintPaint.setStrokeWidth(1);
+        canvas.drawArc(mEndArc, -90, 180, false, mLintPaint);
     }
 
     private synchronized void drawColorLint(Canvas canvas) {
         if (mColorList != null) {
             for (ColorScope scope : mColorList) {
-                float x = mStartPoint.x + progressToPx(scope.mStartProgress);
-                float x2 = mStartPoint.x + progressToPx(scope.mEndProgress);
-                Log.e(TAG, "drawColorLint,color: " + scope.mColor + " ,start px:" + x + ",end px:" + x2);
+                mLintPaint.setStrokeWidth(mMaxHeight);
+                float x = progressToPx(scope.mStartProgress) + getPaddingLeft();
+                float x2 = progressToPx(scope.mEndProgress) + getPaddingLeft();
                 mLintPaint.setColor(scope.mColor);
                 canvas.drawLine(x,
                         mStartPoint.y,
                         x2,
                         mEndPoint.y,
                         mLintPaint);
+                if (scope.mStartProgress <= 0) {
+                    drawStartArc(canvas);
+                }
+                if (scope.mEndProgress >= mMax) {
+                    drawEndArc(canvas);
+                }
             }
         }
     }
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -184,6 +217,11 @@ public class ColorFulSeekbar extends View {
             mThumbHeight = Math.max(mMinHeight, Math.min(mMaxHeight, mThumbDrawable.getIntrinsicHeight()));
             mThumbHeight = Math.max(thumbHeight, mThumbHeight);
         }
+        Rect mThumbRect = new Rect(getPaddingLeft(),
+                getPaddingTop(),
+                mThumbWidth + getPaddingLeft(),
+                getPaddingTop() + mThumbHeight);
+        mThumbDrawable.setBounds(mThumbRect);
         onInitDraw();
 
         setMeasuredDimension(resolveSizeAndState(mThumbWidth + getPaddingLeft() + getPaddingRight(),
@@ -191,6 +229,7 @@ public class ColorFulSeekbar extends View {
                 resolveSizeAndState(mThumbHeight + getPaddingTop() + getPaddingBottom(),
                         heightMeasureSpec, 0));
     }
+
 
     /**
      * Draw the thumb.
@@ -201,7 +240,8 @@ public class ColorFulSeekbar extends View {
             canvas.translate(getPaddingLeft(), getPaddingTop());
             mThumbDrawable.draw(canvas);
             canvas.restoreToCount(saveCount);
-            mProgress = pxToProgress(mThumbDrawable.getBounds().left - getPaddingLeft());
+            mProgress = pxToProgress(mThumbDrawable.getBounds().left - getPaddingLeft()
+                    + mThumbWidth / 2);
             onProgressRefresh(mIsTouch, mProgress);
         }
     }
@@ -280,9 +320,10 @@ public class ColorFulSeekbar extends View {
     }
 
     private void moveThumb(int progress) {
-        int left = (int) (progressToPx(progress) + getPaddingLeft());
+        //progressToPx(progress) 中心点位置
+        int left = (int) (progressToPx(progress) + getPaddingLeft() - mThumbWidth / 2);
         int right = left + mThumbWidth;
-        if (right > (getWidth() - getPaddingRight()) || left < getPaddingLeft()) {
+        if (right > (getWidth() - getPaddingRight()) || left < 0) {
             return;
         } else {
             mThumbDrawable.setBounds(left, getPaddingTop(), right,
@@ -327,6 +368,7 @@ public class ColorFulSeekbar extends View {
     }
 
     private float progressToPx(int progress) {
+        if (mEndPoint.x <= mStartPoint.x) return 0;
         float left = (float) progress / mMax * (mEndPoint.x - mStartPoint.x);
         left += mThumbWidth / 2;
         if (left < mThumbWidth / 2) {
@@ -343,18 +385,19 @@ public class ColorFulSeekbar extends View {
         onInitDraw();
     }
 
-    private void onInitDraw(){
+    private void onInitDraw() {
+        if (getWidth() <= 0) return;
         mStartPoint = new Point(getPaddingLeft() + mThumbWidth / 2, mThumbHeight / 2 + getPaddingTop());
         mEndPoint = new Point(getWidth() - getPaddingRight() - mThumbWidth / 2, mThumbHeight / 2 + getPaddingTop());
 
-        Rect mThumbRect = new Rect(getPaddingLeft(),
-                getPaddingTop(),
-                mThumbWidth + getPaddingLeft(),
-                getPaddingTop() + mThumbHeight);
-        mThumbDrawable.setBounds(mThumbRect);
+        mStartArc = new RectF(mStartPoint.x - mMaxHeight / 2, mStartPoint.y - mMaxHeight / 2,
+                mStartPoint.x + mMaxHeight / 2, mStartPoint.y + mMaxHeight / 2);
 
+        mEndArc = new RectF(mEndPoint.x - mMaxHeight / 2, mEndPoint.y - mMaxHeight / 2,
+                mEndPoint.x + mMaxHeight / 2, mEndPoint.y + mMaxHeight / 2);
         moveThumb(mProgress);
     }
+
     public class ColorScope {
         public ColorScope(int color, int startProgress) {
             this.mColor = color;
