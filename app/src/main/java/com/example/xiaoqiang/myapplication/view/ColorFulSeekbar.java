@@ -54,8 +54,7 @@ public class ColorFulSeekbar extends View {
     private int mProgress;
     private OnSeekBarChangeListener mOnSeekBarChangeListener;
     private List<ColorScope> mColorList;
-    private RectF mStartArc;
-    private RectF mEndArc;
+    private RectF mLintRect;
 
     public ColorFulSeekbar(Context context) {
         this(context, null);
@@ -117,9 +116,8 @@ public class ColorFulSeekbar extends View {
         mLintPaint = new Paint();
         mLintPaint.setColor(mBackground);
         mLintPaint.setAntiAlias(true); //消除锯齿
-        mLintPaint.setStrokeWidth(mMaxHeight);
-//        mLintPaint.setStyle(Paint.Style.FILL);
-        mLintPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        mLintPaint.setStrokeWidth(1f);
+        mLintPaint.setStyle(Paint.Style.FILL);
 
         if (mThumbDrawable == null) {
             mThumbDrawable = new ShapeDrawable(new OvalShape());
@@ -134,15 +132,15 @@ public class ColorFulSeekbar extends View {
     }
 
     public synchronized void setProgress(int color, int progress) {
-        if (progress > 0 && progress < mMax) {
+        if (progress >= 0 && progress <= mMax) {
             if (mColorList == null) {
                 mColorList = new ArrayList<ColorScope>();
-                mColorList.add(new ColorScope(color, mProgress));
+                mColorList.add(new ColorScope(color, mProgress, mProgress));
             }
             ColorScope colorScope = mColorList.get(mColorList.size() - 1);
-            if (!(colorScope.mColor == color && (mProgress >= colorScope.mStartProgress
-                    && mProgress <= colorScope.mEndProgress))) {
-                colorScope = new ColorScope(color, mProgress);
+            if (!(colorScope.mColor == color && mProgress >= colorScope.mStartProgress
+                    && mProgress <= colorScope.mEndProgress)) {
+                colorScope = new ColorScope(color, mProgress, mProgress);
                 mColorList.add(colorScope);
             }
             colorScope.mEndProgress = progress;
@@ -162,46 +160,21 @@ public class ColorFulSeekbar extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mLintPaint.setColor(mBackground);
-        mLintPaint.setStrokeWidth(mMaxHeight);
-        canvas.drawLine(mStartPoint.x,
-                mStartPoint.y,
-                mEndPoint.x,
-                mEndPoint.y,
-                mLintPaint);
-        drawStartArc(canvas);
-        drawEndArc(canvas);
+        mLintRect.left = mStartPoint.x;
+        mLintRect.right = mEndPoint.x;
+        canvas.drawRoundRect(mLintRect, mMaxHeight / 2, mMaxHeight / 2, mLintPaint);
         drawColorLint(canvas);
         drawThumb(canvas);
-    }
-
-    private void drawStartArc(Canvas canvas) {
-        mLintPaint.setStrokeWidth(1);
-        canvas.drawArc(mStartArc, 90, 180, false, mLintPaint);
-    }
-
-    private void drawEndArc(Canvas canvas) {
-        mLintPaint.setStrokeWidth(1);
-        canvas.drawArc(mEndArc, -90, 180, false, mLintPaint);
     }
 
     private synchronized void drawColorLint(Canvas canvas) {
         if (mColorList != null) {
             for (ColorScope scope : mColorList) {
-                mLintPaint.setStrokeWidth(mMaxHeight);
-                float x = progressToPx(scope.mStartProgress) + getPaddingLeft();
-                float x2 = progressToPx(scope.mEndProgress) + getPaddingLeft();
+                mLintRect.left = progressToPx(scope.mStartProgress) + getPaddingLeft();
+                mLintRect.right = progressToPx(scope.mEndProgress) + getPaddingLeft();
                 mLintPaint.setColor(scope.mColor);
-                canvas.drawLine(x,
-                        mStartPoint.y,
-                        x2,
-                        mEndPoint.y,
-                        mLintPaint);
-                if (scope.mStartProgress <= 0) {
-                    drawStartArc(canvas);
-                }
-                if (scope.mEndProgress >= mMax) {
-                    drawEndArc(canvas);
-                }
+                canvas.drawRoundRect(mLintRect, mMaxHeight / 2,
+                        mMaxHeight / 2, mLintPaint);
             }
         }
     }
@@ -301,8 +274,8 @@ public class ColorFulSeekbar extends View {
     private boolean isScopeOf(MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
-        if (x > mStartPoint.x && x < mEndPoint.x && y > 0 &&
-                y < mThumbHeight) {
+        if (x > mStartPoint.x && x < mEndPoint.x && y >= getPaddingTop() &&
+                y <= mThumbHeight + getPaddingTop()) {
             return true;
         }
         return false;
@@ -390,18 +363,16 @@ public class ColorFulSeekbar extends View {
         mStartPoint = new Point(getPaddingLeft() + mThumbWidth / 2, mThumbHeight / 2 + getPaddingTop());
         mEndPoint = new Point(getWidth() - getPaddingRight() - mThumbWidth / 2, mThumbHeight / 2 + getPaddingTop());
 
-        mStartArc = new RectF(mStartPoint.x - mMaxHeight / 2, mStartPoint.y - mMaxHeight / 2,
-                mStartPoint.x + mMaxHeight / 2, mStartPoint.y + mMaxHeight / 2);
-
-        mEndArc = new RectF(mEndPoint.x - mMaxHeight / 2, mEndPoint.y - mMaxHeight / 2,
-                mEndPoint.x + mMaxHeight / 2, mEndPoint.y + mMaxHeight / 2);
+        mLintRect = new RectF(mStartPoint.x, mStartPoint.y - mMaxHeight / 2,
+                mEndPoint.x, mEndPoint.y + mMaxHeight / 2);
         moveThumb(mProgress);
     }
 
     public class ColorScope {
-        public ColorScope(int color, int startProgress) {
+        public ColorScope(int color, int startProgress, int endProgress) {
             this.mColor = color;
             this.mStartProgress = startProgress;
+            this.mEndProgress = endProgress;
         }
 
         public int mColor;
