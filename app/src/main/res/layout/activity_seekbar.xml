@@ -20,6 +20,20 @@
             app:cMaxHeight="5dp"
             app:cThumbTint="@drawable/kts_volume_seek_bar_thumb" />
 
+        <com.example.xiaoqiang.myapplication.view.ColorSeekbar
+            android:id="@+id/color_seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginTop="100dp"
+            android:max="100"
+            android:maxHeight="5dp"
+            app:ColorMaxHeight="5dp"
+            android:progressDrawable="@drawable/seekbar_material"
+            android:thumb="@drawable/kts_volume_seek_bar_thumb"
+            android:thumbOffset="0dip" />
+
+
         <Button
             android:id="@+id/add_red"
             android:layout_width="match_parent"
@@ -43,11 +57,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="+5" />
+
         <Button
             android:id="@+id/remove_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="-5" />
+
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

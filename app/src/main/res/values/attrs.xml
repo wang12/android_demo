@@ -35,4 +35,9 @@
         <attr name="cMax" format="integer" />
         <attr name="cProgress" format="integer" />
     </declare-styleable>
+    <declare-styleable name="ColorSeekbar">
+        <attr name="ColorMaxHeight" format="dimension" />
+        <attr name="ColorMinHeight" format="dimension" />
+        <attr name="ColorBackground" format="color|reference" />
+    </declare-styleable>
 </resources>
