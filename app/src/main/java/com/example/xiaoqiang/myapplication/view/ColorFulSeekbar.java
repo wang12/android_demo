@@ -46,7 +46,7 @@ public class ColorFulSeekbar extends View {
     int mMinWidth;
     int mMaxWidth;
     int mMinHeight;
-    protected  int mMaxHeight;
+    protected int mMaxHeight;
     private boolean mIsTouch;
     private float mTouchX;
     private float mInitTouchX;
@@ -131,18 +131,23 @@ public class ColorFulSeekbar extends View {
         return mProgress;
     }
 
-    public synchronized void setProgress(int color, int progress) {
-        if (progress >= 0 && progress <= mMax) {
+    public synchronized void setProgressOffset(int color) {
+        setProgressOffset(color, 1);
+    }
+
+    private synchronized void setProgressOffset(int color, int offset) {
+        int progress = getProgress();
+        if (progress + offset <= mMax) {
             if (mColorList == null) {
                 mColorList = new ArrayList<ColorScope>();
                 mColorList.add(new ColorScope(color, mProgress, mProgress));
             }
             ColorScope colorScope = mColorList.get(mColorList.size() - 1);
-            if (!(colorScope.mColor == color && mProgress >= colorScope.mStartProgress
-                    && mProgress <= colorScope.mEndProgress)) {
+            if (colorScope.mColor != color || colorScope.mEndProgress != progress) {
                 colorScope = new ColorScope(color, mProgress, mProgress);
                 mColorList.add(colorScope);
             }
+            progress = progress + offset;
             colorScope.mEndProgress = progress;
             moveThumb(progress);
             invalidate();
@@ -182,6 +187,7 @@ public class ColorFulSeekbar extends View {
             }
         }
     }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);

@@ -82,25 +82,25 @@ public class SeekbarActivity extends Activity {
         findViewById(R.id.add_black).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSeekbar.setProgress(0xff000000, mSeekbar.getProgress() + 1);
-                mColorSeek.setProgress(0xff000000, mSeekbar.getProgress() + 1);
-                mImageSeekbar.setProgress(0x66000000, mSeekbar.getProgress() + 1);
+                mSeekbar.setProgressOffset(0xff000000);
+                mColorSeek.setProgressOffset(0xff000000);
+                mImageSeekbar.setProgressOffset(0x66000000);
             }
         });
         findViewById(R.id.add_blue).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSeekbar.setProgress(0xff0000ff, mSeekbar.getProgress() + 1);
-                mColorSeek.setProgress(0xff0000ff, mSeekbar.getProgress() + 1);
-                mImageSeekbar.setProgress(0x660000ff, mSeekbar.getProgress() + 1);
+                mSeekbar.setProgressOffset(0xff0000ff);
+                mColorSeek.setProgressOffset(0xff0000ff);
+                mImageSeekbar.setProgressOffset(0x660000ff);
             }
         });
         findViewById(R.id.add_red).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSeekbar.setProgress(0xffff0000, mSeekbar.getProgress() + 1);
-                mColorSeek.setProgress(0xffff0000, mSeekbar.getProgress() + 1);
-                mImageSeekbar.setProgress(0x66ff0000, mSeekbar.getProgress() + 1);
+                mSeekbar.setProgressOffset(0xffff0000);
+                mColorSeek.setProgressOffset(0xffff0000);
+                mImageSeekbar.setProgressOffset(0x66ff0000);
             }
         });
         findViewById(R.id.add_5).setOnClickListener(new View.OnClickListener() {

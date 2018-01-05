@@ -69,20 +69,26 @@ public class ColorSeekbar extends android.support.v7.widget.AppCompatSeekBar {
         super.onDraw(canvas);
     }
 
-    public synchronized void setProgress(int color, int progress) {
-        if (progress >= 0) {
+    public synchronized void setProgressOffset(int color) {
+        setProgressOffset(color, 1);
+    }
+
+    private synchronized void setProgressOffset(int color, int offset) {
+        int progress = getProgress();
+        if (progress + offset <= getMax()) {
             if (mColorList == null) {
                 mColorList = new ArrayList<ColorScope>();
                 mColorList.add(new ColorScope(color, getProgress(), getProgress()));
             }
             ColorScope colorScope = mColorList.get(mColorList.size() - 1);
-            if (!(colorScope.mColor == color && getProgress() >= colorScope.mStartProgress
-                    && getProgress() <= colorScope.mEndProgress)) {
+            if (colorScope.mColor != color || colorScope.mEndProgress != progress) {
                 colorScope = new ColorScope(color, getProgress(), getProgress());
                 mColorList.add(colorScope);
             }
+            progress = progress + offset;
             colorScope.mEndProgress = progress;
             setProgress(progress);
+            invalidate();
         }
     }
 
