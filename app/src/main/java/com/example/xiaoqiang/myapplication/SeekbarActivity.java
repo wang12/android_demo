@@ -1,12 +1,15 @@
 package com.example.xiaoqiang.myapplication;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 
+import com.example.xiaoqiang.myapplication.view.ColorFulImageSeekBar;
 import com.example.xiaoqiang.myapplication.view.ColorFulSeekbar;
 import com.example.xiaoqiang.myapplication.view.ColorSeekbar;
 
@@ -26,6 +29,7 @@ public class SeekbarActivity extends Activity {
 
     private ColorFulSeekbar mSeekbar;
     private ColorSeekbar mColorSeek;
+    private ColorFulImageSeekBar mImageSeekbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class SeekbarActivity extends Activity {
         setContentView(R.layout.activity_seekbar);
         mSeekbar = (ColorFulSeekbar) findViewById(R.id.seek_bar);
         mColorSeek = (ColorSeekbar) findViewById(R.id.color_seek_bar);
+        mImageSeekbar = (ColorFulImageSeekBar) findViewById(R.id.image_seek_bar);
 //        mSeekbar.setOnSeekBarChangeListener(new ColorFulSeekbar.OnSeekBarChangeListener() {
 //            @Override
 //            public void onProgressChanged(ColorFulSeekbar seekBar, int progress, boolean fromUser) {
@@ -49,6 +54,13 @@ public class SeekbarActivity extends Activity {
 //                Log.e(TAG, "onStopTrackingTouch");
 //            }
 //        });
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.image);
+        Bitmap[] bitmaps = new Bitmap[14];
+        for (int i =0;i<bitmaps.length ;i++){
+            bitmaps[i] = bitmap;
+        }
+        mImageSeekbar.setBackBitmap(bitmaps);
 
         mColorSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -72,6 +84,7 @@ public class SeekbarActivity extends Activity {
             public void onClick(View v) {
                 mSeekbar.setProgress(0xff000000, mSeekbar.getProgress() + 1);
                 mColorSeek.setProgress(0xff000000, mSeekbar.getProgress() + 1);
+                mImageSeekbar.setProgress(0x66000000, mSeekbar.getProgress() + 1);
             }
         });
         findViewById(R.id.add_blue).setOnClickListener(new View.OnClickListener() {
@@ -79,6 +92,7 @@ public class SeekbarActivity extends Activity {
             public void onClick(View v) {
                 mSeekbar.setProgress(0xff0000ff, mSeekbar.getProgress() + 1);
                 mColorSeek.setProgress(0xff0000ff, mSeekbar.getProgress() + 1);
+                mImageSeekbar.setProgress(0x660000ff, mSeekbar.getProgress() + 1);
             }
         });
         findViewById(R.id.add_red).setOnClickListener(new View.OnClickListener() {
@@ -86,6 +100,7 @@ public class SeekbarActivity extends Activity {
             public void onClick(View v) {
                 mSeekbar.setProgress(0xffff0000, mSeekbar.getProgress() + 1);
                 mColorSeek.setProgress(0xffff0000, mSeekbar.getProgress() + 1);
+                mImageSeekbar.setProgress(0x66ff0000, mSeekbar.getProgress() + 1);
             }
         });
         findViewById(R.id.add_5).setOnClickListener(new View.OnClickListener() {
@@ -93,6 +108,7 @@ public class SeekbarActivity extends Activity {
             public void onClick(View v) {
                 mSeekbar.setProgress(mSeekbar.getProgress() + 5);
                 mColorSeek.setProgress(mSeekbar.getProgress() + 5);
+                mImageSeekbar.setProgress(mSeekbar.getProgress() + 5);
             }
         });
         findViewById(R.id.remove_5).setOnClickListener(new View.OnClickListener() {
@@ -100,6 +116,7 @@ public class SeekbarActivity extends Activity {
             public void onClick(View v) {
                 mSeekbar.setProgress(mSeekbar.getProgress() - 5);
                 mColorSeek.setProgress(mSeekbar.getProgress() - 5);
+                mImageSeekbar.setProgress(mSeekbar.getProgress() - 5);
             }
         });
     }

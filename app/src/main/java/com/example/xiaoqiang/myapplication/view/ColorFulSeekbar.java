@@ -36,25 +36,25 @@ public class ColorFulSeekbar extends View {
     private Drawable mThumbDrawable;
     private int mBackground;
     private Context mContext;
-    private Paint mLintPaint;
+    protected Paint mLintPaint;
     boolean mIsUserSeekable = true;
     private int mThumbHeight;
     private int mThumbWidth;
-    private Point mStartPoint;
-    private Point mEndPoint;
+    protected Point mStartPoint;
+    protected Point mEndPoint;
 
     int mMinWidth;
     int mMaxWidth;
     int mMinHeight;
-    int mMaxHeight;
+    protected  int mMaxHeight;
     private boolean mIsTouch;
     private float mTouchX;
     private float mInitTouchX;
     private int mMax;
     private int mProgress;
     private OnSeekBarChangeListener mOnSeekBarChangeListener;
-    private List<ColorScope> mColorList;
-    private RectF mLintRect;
+    protected List<ColorScope> mColorList;
+    protected RectF mLintRect;
 
     public ColorFulSeekbar(Context context) {
         this(context, null);
@@ -159,15 +159,19 @@ public class ColorFulSeekbar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        mLintPaint.setColor(mBackground);
-        mLintRect.left = mStartPoint.x;
-        mLintRect.right = mEndPoint.x;
-        canvas.drawRoundRect(mLintRect, mMaxHeight / 2, mMaxHeight / 2, mLintPaint);
+        drawBack(canvas);
         drawColorLint(canvas);
         drawThumb(canvas);
     }
 
-    private synchronized void drawColorLint(Canvas canvas) {
+    protected synchronized void drawBack(Canvas canvas) {
+        mLintPaint.setColor(mBackground);
+        mLintRect.left = mStartPoint.x;
+        mLintRect.right = mEndPoint.x;
+        canvas.drawRoundRect(mLintRect, mMaxHeight / 2, mMaxHeight / 2, mLintPaint);
+    }
+
+    protected synchronized void drawColorLint(Canvas canvas) {
         if (mColorList != null) {
             for (ColorScope scope : mColorList) {
                 mLintRect.left = progressToPx(scope.mStartProgress) + getPaddingLeft();
@@ -178,8 +182,6 @@ public class ColorFulSeekbar extends View {
             }
         }
     }
-
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -195,12 +197,12 @@ public class ColorFulSeekbar extends View {
                 mThumbWidth + getPaddingLeft(),
                 getPaddingTop() + mThumbHeight);
         mThumbDrawable.setBounds(mThumbRect);
-        onInitDraw();
 
         setMeasuredDimension(resolveSizeAndState(mThumbWidth + getPaddingLeft() + getPaddingRight(),
                 widthMeasureSpec, 0),
                 resolveSizeAndState(mThumbHeight + getPaddingTop() + getPaddingBottom(),
                         heightMeasureSpec, 0));
+        onInitDraw();
     }
 
 
@@ -340,7 +342,7 @@ public class ColorFulSeekbar extends View {
         return progress;
     }
 
-    private float progressToPx(int progress) {
+    protected float progressToPx(int progress) {
         if (mEndPoint.x <= mStartPoint.x) return 0;
         float left = (float) progress / mMax * (mEndPoint.x - mStartPoint.x);
         left += mThumbWidth / 2;
@@ -358,7 +360,7 @@ public class ColorFulSeekbar extends View {
         onInitDraw();
     }
 
-    private void onInitDraw() {
+    protected void onInitDraw() {
         if (getWidth() <= 0) return;
         mStartPoint = new Point(getPaddingLeft() + mThumbWidth / 2, mThumbHeight / 2 + getPaddingTop());
         mEndPoint = new Point(getWidth() - getPaddingRight() - mThumbWidth / 2, mThumbHeight / 2 + getPaddingTop());

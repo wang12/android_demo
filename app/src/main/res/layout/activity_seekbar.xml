@@ -28,10 +28,19 @@
             android:layout_marginTop="100dp"
             android:max="100"
             android:maxHeight="5dp"
-            app:ColorMaxHeight="5dp"
             android:progressDrawable="@drawable/seekbar_material"
             android:thumb="@drawable/kts_volume_seek_bar_thumb"
-            android:thumbOffset="0dip" />
+            android:thumbOffset="0dip"
+            app:ColorMaxHeight="5dp" />
+
+        <com.example.xiaoqiang.myapplication.view.ColorFulImageSeekBar
+           android:id="@+id/image_seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cMaxHeight="30dp"
+            app:cThumbTint="@drawable/seek_bar_thumb"
+            app:cBackground="#00ff00ff"
+            />
 
 
         <Button
@@ -64,6 +73,11 @@
             android:layout_height="wrap_content"
             android:text="-5" />
 
+        <Button
+            android:id="@+id/start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="定时开始" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
