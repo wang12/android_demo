@@ -142,7 +142,7 @@ public class SeekbarActivity extends Activity {
     private Runnable mDelayedRun = new Runnable() {
         @Override
         public void run() {
-            mColor++;
+            mColor+=0x00000001;
             mSeekbar.setProgressOffset(mColor);
             mColorSeek.setProgressOffset(mColor);
             mImageSeekbar.setProgressOffset(mColor);

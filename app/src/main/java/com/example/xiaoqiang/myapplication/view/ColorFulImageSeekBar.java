@@ -4,8 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
@@ -24,6 +25,7 @@ public class ColorFulImageSeekBar extends ColorFulSeekbar {
     private Rect mDst;
     private int mBitmapWidth;
     private Paint mBitmapPaint;
+//    private ColorLintDrawable mColorDrawable;
 
     public ColorFulImageSeekBar(Context context) {
         super(context);
@@ -42,6 +44,7 @@ public class ColorFulImageSeekBar extends ColorFulSeekbar {
 
     private void init() {
         mBitmapPaint = new Paint();
+//        mColorDrawable = new ColorLintDrawable();
     }
 
     @Override
@@ -51,19 +54,29 @@ public class ColorFulImageSeekBar extends ColorFulSeekbar {
         for (int i = 0; i < mBackBitmaps.length; i++) {
             mDst.left = i * mBitmapWidth + mStartPoint.x;
             mDst.right = mDst.left + mBitmapWidth;
-            mDst.right = (mDst.right > mEndPoint.x)?mEndPoint.x:mDst.right;
+            mDst.right = (mDst.right > mEndPoint.x) ? mEndPoint.x : mDst.right;
             canvas.drawBitmap(mBackBitmaps[i], mSrc, mDst, mBitmapPaint);
         }
     }
+
     @Override
     protected synchronized void drawColorLint(Canvas canvas) {
         if (mColorList != null) {
+//            mColorDrawable.clearColor();
+            mLintPaint.setAlpha(0x22);
             for (ColorScope scope : mColorList) {
                 mLintRect.left = progressToPx(scope.mStartProgress) + getPaddingLeft();
                 mLintRect.right = progressToPx(scope.mEndProgress) + getPaddingLeft();
                 mLintPaint.setColor(scope.mColor);
                 canvas.drawRect(mLintRect,mLintPaint);
+//                mColorDrawable.addColor(scope.mColor, progressToPx(scope.mStartProgress),
+//                        progressToPx(scope.mEndProgress));
             }
+//            final int saveCount = canvas.save();
+//            canvas.translate(getPaddingLeft(), getPaddingTop());
+////            mColorDrawable.draw(canvas);
+//            canvas.restoreToCount(saveCount);
+
         }
     }
 
@@ -81,7 +94,11 @@ public class ColorFulImageSeekBar extends ColorFulSeekbar {
             int mHeight = getHeight() - getPaddingTop() - getPaddingBottom();
             int top = getPaddingTop() + (mHeight - mMaxHeight) / 2;
             mDst = new Rect(0, top, mBitmapWidth, top + mMaxHeight);
+//            mColorDrawable.setBounds(new Rect(getPaddingLeft(), getPaddingTop(),
+//                    getWidth() - getPaddingRight(),
+//                    getHeight() - getPaddingBottom()));
         }
+
     }
 
     public void setBackBitmap(Bitmap[] bitmap) {
