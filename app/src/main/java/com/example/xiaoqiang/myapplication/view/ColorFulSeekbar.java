@@ -292,7 +292,7 @@ public class ColorFulSeekbar extends View {
     private void moveThumb(MotionEvent event) {
         int left = (int) (event.getX() - mTouchX + mInitTouchX);
         int right = left + mThumbWidth;
-        if (right > (getWidth() - getPaddingRight()) || left < getPaddingLeft()) {
+        if (right > (getWidth() - getPaddingRight() + mThumbWidth) || left < getPaddingLeft()) {
             return;
         } else {
             mThumbDrawable.setBounds(left, getPaddingTop(), right,
@@ -304,7 +304,8 @@ public class ColorFulSeekbar extends View {
         //progressToPx(progress) 中心点位置
         int left = (int) (progressToPx(progress) + getPaddingLeft() - mThumbWidth / 2);
         int right = left + mThumbWidth;
-        if (right > (getWidth() - getPaddingRight()) || left < 0) {
+        if (right > (getWidth() - getPaddingRight() + mThumbWidth) || left < 0) {
+            Log.e(TAG,"moveThumb ,progress:"+progress+",right:"+right+",left:"+left+",getWidth() - getPaddingRight():"+(getWidth() - getPaddingRight() + mThumbWidth));
             return;
         } else {
             mThumbDrawable.setBounds(left, getPaddingTop(), right,

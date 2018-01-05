@@ -77,7 +77,7 @@
             android:id="@+id/start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="定时开始" />
+            android:text="开启定时刷新" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -49,8 +49,9 @@ public class ColorFulImageSeekBar extends ColorFulSeekbar {
         if (mBackBitmaps == null || mBackBitmaps.length <= 0 || mDst == null || mSrc == null)
             return;
         for (int i = 0; i < mBackBitmaps.length; i++) {
-            mDst.left = i * mBitmapWidth;
+            mDst.left = i * mBitmapWidth + mStartPoint.x;
             mDst.right = mDst.left + mBitmapWidth;
+            mDst.right = (mDst.right > mEndPoint.x)?mEndPoint.x:mDst.right;
             canvas.drawBitmap(mBackBitmaps[i], mSrc, mDst, mBitmapPaint);
         }
     }
