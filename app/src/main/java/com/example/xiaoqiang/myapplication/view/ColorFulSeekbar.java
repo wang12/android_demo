@@ -135,7 +135,7 @@ public class ColorFulSeekbar extends View {
         setProgressOffset(color, 1);
     }
 
-    private synchronized void setProgressOffset(int color, int offset) {
+    protected synchronized void setProgressOffset(int color, int offset) {
         int progress = getProgress();
         if (progress + offset <= mMax) {
             if (mColorList == null) {
@@ -374,6 +374,14 @@ public class ColorFulSeekbar extends View {
         mLintRect = new RectF(mStartPoint.x, mStartPoint.y - mMaxHeight / 2,
                 mEndPoint.x, mEndPoint.y + mMaxHeight / 2);
         moveThumb(mProgress);
+    }
+
+    public int getMax() {
+        return mMax;
+    }
+
+    public void setMax(int mMax) {
+        this.mMax = mMax;
     }
 
     public class ColorScope {

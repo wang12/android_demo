@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -25,7 +23,7 @@ public class ColorFulImageSeekBar extends ColorFulSeekbar {
     private Rect mDst;
     private int mBitmapWidth;
     private Paint mBitmapPaint;
-//    private ColorLintDrawable mColorDrawable;
+    private int[] mColorForProgress;
 
     public ColorFulImageSeekBar(Context context) {
         super(context);
@@ -44,7 +42,6 @@ public class ColorFulImageSeekBar extends ColorFulSeekbar {
 
     private void init() {
         mBitmapPaint = new Paint();
-//        mColorDrawable = new ColorLintDrawable();
     }
 
     @Override
@@ -60,23 +57,44 @@ public class ColorFulImageSeekBar extends ColorFulSeekbar {
     }
 
     @Override
-    protected synchronized void drawColorLint(Canvas canvas) {
-        if (mColorList != null) {
-//            mColorDrawable.clearColor();
-            mLintPaint.setAlpha(0x22);
-            for (ColorScope scope : mColorList) {
-                mLintRect.left = progressToPx(scope.mStartProgress) + getPaddingLeft();
-                mLintRect.right = progressToPx(scope.mEndProgress) + getPaddingLeft();
-                mLintPaint.setColor(scope.mColor);
-                canvas.drawRect(mLintRect,mLintPaint);
-//                mColorDrawable.addColor(scope.mColor, progressToPx(scope.mStartProgress),
-//                        progressToPx(scope.mEndProgress));
+    protected synchronized void setProgressOffset(int color, int offset) {
+        int progress = getProgress();
+        if (progress + offset <= getMax()) {
+            if (mColorForProgress == null || mColorForProgress.length != getMax()) {
+                mColorForProgress = new int[getMax()];
+                if (mColorList != null)
+                    mColorList.clear();
             }
-//            final int saveCount = canvas.save();
-//            canvas.translate(getPaddingLeft(), getPaddingTop());
-////            mColorDrawable.draw(canvas);
-//            canvas.restoreToCount(saveCount);
+            for (int i = progress; i < progress + offset; i++) {
+                mColorForProgress[i] = color;
+            }
+        }
+        super.setProgressOffset(color, offset);
+    }
 
+    @Override
+    protected synchronized void drawColorLint(Canvas canvas) {
+//        if (mColorList != null) {
+//            for (ColorScope scope : mColorList) {
+//                mLintRect.left = progressToPx(scope.mStartProgress) + getPaddingLeft();
+//                mLintRect.right = progressToPx(scope.mEndProgress) + getPaddingLeft();
+//                mLintPaint.setColor(scope.mColor);
+//                canvas.drawRect(mLintRect, mLintPaint);
+//            }
+//        }
+        if (mColorForProgress != null) {
+            int start = 0;
+            int end = 1;
+            for (; end < mColorForProgress.length; ) {
+                if (mColorForProgress[end] != mColorForProgress[start]) {
+                    mLintRect.left = progressToPx(start) + getPaddingLeft();
+                    mLintRect.right = progressToPx(end) + getPaddingLeft();
+                    mLintPaint.setColor(mColorForProgress[start]);
+                    canvas.drawRect(mLintRect, mLintPaint);
+                    start = end;
+                }
+                end++;
+            }
         }
     }
 
@@ -94,12 +112,10 @@ public class ColorFulImageSeekBar extends ColorFulSeekbar {
             int mHeight = getHeight() - getPaddingTop() - getPaddingBottom();
             int top = getPaddingTop() + (mHeight - mMaxHeight) / 2;
             mDst = new Rect(0, top, mBitmapWidth, top + mMaxHeight);
-//            mColorDrawable.setBounds(new Rect(getPaddingLeft(), getPaddingTop(),
-//                    getWidth() - getPaddingRight(),
-//                    getHeight() - getPaddingBottom()));
         }
 
     }
+
 
     public void setBackBitmap(Bitmap[] bitmap) {
         if (bitmap == null || bitmap.length <= 0) return;
