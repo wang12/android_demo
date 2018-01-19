@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffeee0">
 
     <com.example.xiaoqiang.myapplication.view.ThreeLayersButton
+        android:id="@+id/btn_three_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="90dp">
 
     </com.example.xiaoqiang.myapplication.view.ThreeLayersButton>
-</android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_set_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="进度持续增加"
+        android:layout_marginTop="150dp"
+        />
+</RelativeLayout>
