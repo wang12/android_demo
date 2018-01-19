@@ -36,6 +36,7 @@
         <activity android:name=".OpenGLEsDemo" />
         <activity android:name=".OpenGLEGLActivity" />
         <activity android:name=".OpenGLEGLSurfaceActivity" />
+        <activity android:name=".ThreeButtonActivity" />
         <activity
             android:name=".SeekbarActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
