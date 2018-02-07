@@ -4,18 +4,20 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.SeekBar;
 
-import com.example.xiaoqiang.myapplication.view.ColorFulImageSeekBar;
-import com.example.xiaoqiang.myapplication.view.ColorFulSeekbar;
-import com.example.xiaoqiang.myapplication.view.ColorSeekbar;
+import com.example.xiaoqiang.myapplication.view.EffectSeekBar;
 
-import static android.content.ContentValues.TAG;
+import java.util.concurrent.TimeUnit;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * @Author: [xiaoqiang]
@@ -28,134 +30,121 @@ import static android.content.ContentValues.TAG;
 
 public class SeekbarActivity extends Activity {
     private final static String TAG = SeekbarActivity.class.getName();
+    @BindView(R.id.add_red)
+    Button addRed;
+    @BindView(R.id.add_blue)
+    Button addBlue;
+    @BindView(R.id.add_black)
+    Button addBlack;
+    @BindView(R.id.clear_color)
+    Button clearColor;
+    @BindView(R.id.start_add_time)
+    Button startAddTime;
+    @BindView(R.id.stop_add_time)
+    Button stopAddTime;
+    @BindView(R.id.start_sub_time)
+    Button startSubTime;
+    @BindView(R.id.stop_sub_time)
+    Button stopSubTime;
 
-    private ColorFulSeekbar mSeekbar;
-    private ColorSeekbar mColorSeek;
-    private ColorFulImageSeekBar mImageSeekbar;
-    private Handler mHandler;
-    private int mColor;
+    int progress = 0;
+
+    private EffectSeekBar mEffectSeekBar;
+    private Bitmap[] mBitmaps = new Bitmap[14];
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seekbar);
-        mSeekbar = (ColorFulSeekbar) findViewById(R.id.seek_bar);
-        mColorSeek = (ColorSeekbar) findViewById(R.id.color_seek_bar);
-        mImageSeekbar = (ColorFulImageSeekBar) findViewById(R.id.image_seek_bar);
-        mImageSeekbar.setOnSeekBarChangeListener(new ColorFulSeekbar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(ColorFulSeekbar seekBar, int progress, boolean fromUser) {
-                Log.e(TAG, "onProgressChanged,progress:" + progress + ",fromUser:" + fromUser);
-            }
-
-            @Override
-            public void onStartTrackingTouch(ColorFulSeekbar seekBar) {
-                Log.e(TAG, "onStartTrackingTouch");
-            }
-
-            @Override
-            public void onStopTrackingTouch(ColorFulSeekbar seekBar) {
-                Log.e(TAG, "onStopTrackingTouch");
-            }
-        });
-
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.image);
-        Bitmap[] bitmaps = new Bitmap[14];
-        for (int i =0;i<bitmaps.length ;i++){
-            bitmaps[i] = bitmap;
-        }
-        mImageSeekbar.setBackBitmap(bitmaps);
-
-//        mColorSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                Log.e(TAG, "onProgressChanged,progress:" + progress + ",fromUser:" + fromUser);
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//                Log.e(TAG, "onStartTrackingTouch");
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//                Log.e(TAG, "onStopTrackingTouch");
-//            }
-//        });
-
-        findViewById(R.id.add_black).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSeekbar.setProgressOffset(0xff000000);
-                mColorSeek.setProgressOffset(0xff000000);
-                mImageSeekbar.setProgressOffset(0x66000000);
-            }
-        });
-        findViewById(R.id.add_blue).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSeekbar.setProgressOffset(0xff0000ff);
-                mColorSeek.setProgressOffset(0xff0000ff);
-                mImageSeekbar.setProgressOffset(0x660000ff);
-            }
-        });
-        findViewById(R.id.add_red).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSeekbar.setProgressOffset(0xffff0000);
-                mColorSeek.setProgressOffset(0xffff0000);
-                mImageSeekbar.setProgressOffset(0x66ff0000);
-            }
-        });
-        findViewById(R.id.add_5).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSeekbar.setProgress(mSeekbar.getProgress() + 5);
-                mColorSeek.setProgress(mColorSeek.getProgress() + 5);
-                mImageSeekbar.setProgress(mImageSeekbar.getProgress() + 5);
-            }
-        });
-        findViewById(R.id.remove_5).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSeekbar.setProgress(mSeekbar.getProgress() - 5);
-                mColorSeek.setProgress(mColorSeek.getProgress() - 5);
-                mImageSeekbar.setProgress(mImageSeekbar.getProgress() - 5);
-            }
-        });
-        findViewById(R.id.start).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if( mHandler == null){
-                    mHandler = new Handler();
-                    mColor = 0x990000ff;
-                    mHandler.postDelayed(mDelayedRun,100);
-                    ((Button)v).setText("关闭定时刷新");
-                }else{
-                    mHandler.removeCallbacksAndMessages(null);
-                    mHandler = null;
-                    ((Button)v).setText("开启定时刷新");
-                }
-            }
-        });
+        ButterKnife.bind(this);
+        mEffectSeekBar = (EffectSeekBar) findViewById(R.id.effects_seek_bar);
+        initSeekBar();
     }
-    private Runnable mDelayedRun = new Runnable() {
-        @Override
-        public void run() {
-            mColor+=0x00000001;
-            mSeekbar.setProgressOffset(mColor);
-            mColorSeek.setProgressOffset(mColor);
-            mImageSeekbar.setProgressOffset(mColor);
-            mHandler.postDelayed(mDelayedRun,100);
+
+
+    private void initSeekBar() {
+        for (int i = 0; i < mBitmaps.length; i++) {
+            mBitmaps[i] = BitmapFactory.decodeResource(getResources(), R.drawable.image);
         }
-    };
+        mEffectSeekBar.setBackBitmap(mBitmaps);
+        mEffectSeekBar.setMax(5000);
+    }
+
+    @OnClick(R.id.add_red)
+    public void onAddRedClicked() {
+        mEffectSeekBar.setColor(0xAAFFF687);
+    }
+
+    @OnClick(R.id.add_blue)
+    public void onAddBlueClicked() {
+        mEffectSeekBar.setColor(0xAA8AC0FF);
+    }
+
+    @OnClick(R.id.add_black)
+    public void onAddBlackClicked() {
+        mEffectSeekBar.setColor(0xAAFF2E4E);
+    }
+
+    @OnClick(R.id.clear_color)
+    public void onClearColorClicked() {
+        mEffectSeekBar.clearColor();
+    }
+
+    @OnClick(R.id.start_add_time)
+    public void onStartAddTimeClicked() {
+        mAddDisposable =  Observable.interval(500,3, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        progress ++;
+                        if(progress >=  mEffectSeekBar.getMax()){
+                            progress = 0;
+                        }
+                        mEffectSeekBar.setProgress(progress);
+                    }
+                });
+    }
+
+    private Disposable mAddDisposable;
+    private Disposable mSubDisposable;
+
+    @OnClick(R.id.stop_add_time)
+    public void onStopAddTimeClicked() {
+        if(mAddDisposable != null){
+            mAddDisposable.dispose();
+        }
+        mAddDisposable = null;
+    }
+
+    @OnClick(R.id.start_sub_time)
+    public void onStartSubTimeClicked() {
+        mSubDisposable =  Observable.interval(500,3, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        progress --;
+                        if(progress <  0){
+                            progress = mEffectSeekBar.getMax();
+                        }
+                        mEffectSeekBar.setProgress(progress);
+                    }
+                });
+    }
+
+    @OnClick(R.id.stop_sub_time)
+    public void onStopSubTimeClicked() {
+        if(mSubDisposable != null){
+            mSubDisposable.dispose();
+        }
+        mSubDisposable = null;
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(mHandler != null){
-            mHandler.removeCallbacksAndMessages(null);
-            mHandler = null;
-        }
+        onStopAddTimeClicked();
+        onStopSubTimeClicked();
     }
 }

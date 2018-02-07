@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="EffectSeekBar">
+        <attr name="EffectImageHeight" format="dimension|reference" />
+    </declare-styleable>
+
 </resources>

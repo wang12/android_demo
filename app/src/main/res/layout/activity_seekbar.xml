@@ -11,37 +11,16 @@
         android:background="#22ff0000"
         android:orientation="vertical">
 
-        <com.example.xiaoqiang.myapplication.view.ColorFulSeekbar
-            android:id="@+id/seek_bar"
+        <com.example.xiaoqiang.myapplication.view.EffectSeekBar xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/effects_seek_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginTop="100dp"
-            app:cMaxHeight="5dp"
-            app:cThumbTint="@drawable/kts_volume_seek_bar_thumb" />
-
-        <com.example.xiaoqiang.myapplication.view.ColorSeekbar
-            android:id="@+id/color_seek_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginTop="100dp"
-            android:max="100"
-            android:maxHeight="5dp"
+            android:layout_height="54dp"
+            android:paddingEnd="0dp"
+            android:paddingStart="0dp"
             android:progressDrawable="@drawable/seekbar_material"
-            android:thumb="@drawable/kts_volume_seek_bar_thumb"
+            android:thumb="@drawable/seek_bar_thumb"
             android:thumbOffset="0dip"
-            app:ColorMaxHeight="5dp" />
-
-        <com.example.xiaoqiang.myapplication.view.ColorFulImageSeekBar
-           android:id="@+id/image_seek_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cMaxHeight="30dp"
-            app:cThumbTint="@drawable/seek_bar_thumb"
-            app:cBackground="#00ff00ff"
-            />
-
+            app:EffectImageHeight="40dp" />
 
         <Button
             android:id="@+id/add_red"
@@ -62,22 +41,36 @@
             android:text="加黑色" />
 
         <Button
-            android:id="@+id/add_5"
+            android:id="@+id/clear_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+5" />
+            android:text="清除颜色" />
 
         <Button
-            android:id="@+id/remove_5"
+            android:id="@+id/start_add_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="-5" />
+            android:text="开启加定时器" />
 
         <Button
-            android:id="@+id/start"
+            android:id="@+id/stop_add_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="开启定时刷新" />
+            android:text="关闭加定时器" />
+
+        <Button
+            android:id="@+id/start_sub_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="开启减定时器" />
+
+        <Button
+            android:id="@+id/stop_sub_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="关闭减定时器" />
+
+
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
