@@ -102,6 +102,14 @@ public class MainActivity extends Activity {
             }
         });
 
+        findViewById(R.id.btn_life_cycles_button).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LifecyclesActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

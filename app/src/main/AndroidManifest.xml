@@ -10,6 +10,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/AppTheme"
         android:supportsRtl="true">
 
         <activity android:name=".MainActivity">
@@ -41,6 +42,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <activity android:name=".MVPActivity" />
+        <activity android:name=".LifecyclesActivity" />
     </application>
 
 </manifest>
