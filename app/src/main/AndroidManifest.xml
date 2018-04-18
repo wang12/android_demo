@@ -10,8 +10,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/AppTheme"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -37,6 +37,8 @@
         <activity android:name=".OpenGLEGLActivity" />
         <activity android:name=".OpenGLEGLSurfaceActivity" />
         <activity android:name=".ThreeButtonActivity" />
+        <activity android:name=".designMode.DesignModeActivity" />
+        <activity android:name=".designMode.simpleFactoryPattern.SimpleFactoryPattern" />
         <activity
             android:name=".SeekbarActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
