@@ -12,8 +12,8 @@ package com.example.xiaoqiang.myapplication.designMode.proxy;
 public class GameProxy implements IGame {
     private IGame mGame;
 
-    public GameProxy() {
-        mGame = new WOWGame();
+    public GameProxy(IGame game) {
+        this.mGame = game;
     }
 
     @Override

@@ -17,14 +17,16 @@ import android.widget.TextView;
 public class ProxyActivity extends Activity {
     private TextView mTextView;
 
-    private GameProxy mGameProxy;
+    private IGame mGameProxy;
+    private IGame mGame;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mTextView = new TextView(this);
         setContentView(mTextView);
-        mGameProxy = new GameProxy();
+        mGame = new WOWGame();
+        mGameProxy = new GameProxy(mGame);
         mTextView.setText(mGameProxy.play());
 
     }
