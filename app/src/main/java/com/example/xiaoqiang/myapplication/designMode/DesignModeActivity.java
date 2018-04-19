@@ -7,6 +7,9 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.xiaoqiang.myapplication.R;
+import com.example.xiaoqiang.myapplication.designMode.AbstractFactoryPattern.AbstractFactoryPattern;
+import com.example.xiaoqiang.myapplication.designMode.FactoryPattern.FactoryPattern;
+import com.example.xiaoqiang.myapplication.designMode.builder.BuilderActivity;
 import com.example.xiaoqiang.myapplication.designMode.simpleFactoryPattern.SimpleFactoryPattern;
 
 /**
@@ -30,5 +33,28 @@ public class DesignModeActivity extends Activity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.FactoryPattern).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DesignModeActivity.this, FactoryPattern.class);
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.AbstractFactoryPattern).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DesignModeActivity.this, AbstractFactoryPattern.class);
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.BuilderActivity).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DesignModeActivity.this, BuilderActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 }

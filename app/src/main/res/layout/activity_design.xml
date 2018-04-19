@@ -16,5 +16,29 @@
             android:text="简单工厂模式"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/FactoryPattern"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="工厂模式"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/AbstractFactoryPattern"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="抽象工厂模式"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/BuilderActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="建造者模式"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 </ScrollView>

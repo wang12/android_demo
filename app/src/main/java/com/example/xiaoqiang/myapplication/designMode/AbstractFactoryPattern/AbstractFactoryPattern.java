@@ -1,23 +1,26 @@
-package com.example.xiaoqiang.myapplication.designMode.FactoryPattern;
+package com.example.xiaoqiang.myapplication.designMode.AbstractFactoryPattern;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
 
-import com.example.xiaoqiang.myapplication.designMode.simpleFactoryPattern.MobileFactory;
+import com.example.xiaoqiang.myapplication.designMode.FactoryPattern.MeizuFactory;
+import com.example.xiaoqiang.myapplication.designMode.FactoryPattern.SansungFactory;
+import com.example.xiaoqiang.myapplication.designMode.FactoryPattern.XiaoMiFactory;
 
 /**
  * @Author: [xiaoqiang]
- * @Description: [FactoryPattern]
- * @CreateDate: [2018/4/18]
- * @UpdateDate: [2018/4/18]
+ * @Description: [AbstractFactoryPattern]
+ * @CreateDate: [2018/4/19]
+ * @UpdateDate: [2018/4/19]
  * @UpdateUser: [xiaoqiang]
  * @UpdateRemark: []
  */
 
-public class FactoryPattern extends Activity {
+public class AbstractFactoryPattern extends Activity {
     private TextView mTextView;
+    private MobileFactory mMobileFactory;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,17 +28,17 @@ public class FactoryPattern extends Activity {
         mTextView = new TextView(this);
         setContentView(mTextView);
 
+        mMobileFactory = new AbstractFactory();
         StringBuffer stringBuffer = new StringBuffer();
 
         stringBuffer.append("通过简单工厂模式创建魅族手机对象\n");
-        stringBuffer.append(new MeizuFactory().createMobilePhone().makeCall());
+        stringBuffer.append(mMobileFactory.createMeizu().makeCall());
         stringBuffer.append("\n通过简单工厂模式创建小米手机对象\n");
-        stringBuffer.append(new XiaoMiFactory().createMobilePhone().makeCall());
+        stringBuffer.append(mMobileFactory.createXiaoMi().makeCall());
         stringBuffer.append("\n通过简单工厂模式创建三星手机对象\n");
-        stringBuffer.append(new SansungFactory().createMobilePhone().makeCall());
+        stringBuffer.append(mMobileFactory.createSansung().makeCall());
 
         mTextView.setText(stringBuffer.toString());
 
     }
-
 }

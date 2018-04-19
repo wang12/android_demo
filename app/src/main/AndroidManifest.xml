@@ -39,6 +39,9 @@
         <activity android:name=".ThreeButtonActivity" />
         <activity android:name=".designMode.DesignModeActivity" />
         <activity android:name=".designMode.simpleFactoryPattern.SimpleFactoryPattern" />
+        <activity android:name=".designMode.FactoryPattern.FactoryPattern" />
+        <activity android:name=".designMode.AbstractFactoryPattern.AbstractFactoryPattern" />
+        <activity android:name=".designMode.builder.BuilderActivity" />
         <activity
             android:name=".SeekbarActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
