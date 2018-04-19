@@ -10,6 +10,7 @@ import com.example.xiaoqiang.myapplication.R;
 import com.example.xiaoqiang.myapplication.designMode.AbstractFactoryPattern.AbstractFactoryPattern;
 import com.example.xiaoqiang.myapplication.designMode.FactoryPattern.FactoryPattern;
 import com.example.xiaoqiang.myapplication.designMode.builder.BuilderActivity;
+import com.example.xiaoqiang.myapplication.designMode.proxy.ProxyActivity;
 import com.example.xiaoqiang.myapplication.designMode.simpleFactoryPattern.SimpleFactoryPattern;
 
 /**
@@ -51,6 +52,13 @@ public class DesignModeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DesignModeActivity.this, BuilderActivity.class);
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.ProxyActivity).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DesignModeActivity.this, ProxyActivity.class);
                 startActivity(intent);
             }
         });

@@ -42,6 +42,7 @@
         <activity android:name=".designMode.FactoryPattern.FactoryPattern" />
         <activity android:name=".designMode.AbstractFactoryPattern.AbstractFactoryPattern" />
         <activity android:name=".designMode.builder.BuilderActivity" />
+        <activity android:name=".designMode.proxy.ProxyActivity" />
         <activity
             android:name=".SeekbarActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
