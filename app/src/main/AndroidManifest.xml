@@ -3,6 +3,11 @@
     package="com.example.xiaoqiang.myapplication">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".application.MyApplication"
@@ -43,6 +48,9 @@
         <activity android:name=".designMode.AbstractFactoryPattern.AbstractFactoryPattern" />
         <activity android:name=".designMode.builder.BuilderActivity" />
         <activity android:name=".designMode.proxy.ProxyActivity" />
+        <activity android:name=".algorithm.AlgorithmActivity" />
+        <activity android:name=".PlayerActivity" />
+        <activity android:name=".play.kingsoft.KingSoftActivity" />
         <activity
             android:name=".SeekbarActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />

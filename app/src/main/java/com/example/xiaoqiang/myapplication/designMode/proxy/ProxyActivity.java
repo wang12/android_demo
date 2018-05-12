@@ -3,6 +3,7 @@ package com.example.xiaoqiang.myapplication.designMode.proxy;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.MotionEvent;
 import android.widget.TextView;
 
 /**
@@ -30,4 +31,5 @@ public class ProxyActivity extends Activity {
         mTextView.setText(mGameProxy.play());
 
     }
+
 }

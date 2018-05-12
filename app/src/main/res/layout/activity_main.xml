@@ -119,5 +119,19 @@
             android:layout_margin="10dp"
             android:text="23中设计模式"
             android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_algorithm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="算法大全"
+            android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="播放视频"
+            android:textAllCaps="false" />
     </LinearLayout>
 </ScrollView>
