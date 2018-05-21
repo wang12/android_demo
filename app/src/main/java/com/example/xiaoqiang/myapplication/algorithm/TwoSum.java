@@ -71,6 +71,7 @@ public class TwoSum {
 
     /**
      * 把所有的数据放入Hash表中，然后查找 target - a 的值是否存在，存在就返回a 和对应的值
+     * 不可以有重复数据
      * @param nums
      * @param target
      * @return
@@ -114,6 +115,8 @@ public class TwoSum {
 
         @Override
         public int compareTo(@NonNull Node o) {
+            if(val < o.val) return -1;
+            if(val > o.val) return 1;
             return 0;
         }
     }
