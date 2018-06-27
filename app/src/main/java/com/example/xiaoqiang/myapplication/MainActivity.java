@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.xiaoqiang.myapplication.algorithm.AlgorithmActivity;
 import com.example.xiaoqiang.myapplication.designMode.DesignModeActivity;
+import com.example.xiaoqiang.myapplication.java.InsideClass;
 
 public class MainActivity extends Activity {
     private final Handler mHandler = new Handler();
@@ -134,6 +136,36 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override
