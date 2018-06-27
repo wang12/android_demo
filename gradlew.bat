@@ -1,4 +1,5 @@
 @if "%DEBUG%" == "" @echo off
+ffsfdfsdf
 asdfasdfasdfasdfasdf
 @rem ##########################################################################
 @rem
